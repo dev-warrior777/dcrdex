@@ -1,7 +1,7 @@
 // This code is available on the terms of the project LICENSE.md file,
 // also available online at https://blueoakcouncil.org/license/1.0.0.
 
-//go:build electrumlive
+// /////go:build electrumlive
 
 package btc
 
@@ -44,6 +44,7 @@ func TestPSBT(t *testing.T) {
 }
 
 // This test uses a testnet BTC Electrum wallet listening on localhost 6789.
+// Use only 'default_wallet'!
 
 func TestElectrumExchangeWallet(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
@@ -55,7 +56,7 @@ func TestElectrumExchangeWallet(t *testing.T) {
 		Settings: map[string]string{
 			"rpcuser":     "user",
 			"rpcpassword": "pass",
-			"rpcbind":     "127.0.0.1:6789",
+			"rpcbind":     "127.0.0.1:16789",
 		},
 		Emit: asset.NewWalletEmitter(notes, BipID, tLogger),
 		PeersChange: func(num uint32, err error) {
@@ -141,10 +142,10 @@ func TestElectrumExchangeWallet(t *testing.T) {
 
 	t.Logf("Found redemption of contract %v:%d at %v:%d!", swapTxHash, swapVout, foundTxHash, foundVin)
 
-	// err = eew.Unlock([]byte(walletPass))
-	// if err != nil {
-	// 	t.Fatal(err)
-	// }
+	err = eew.Unlock([]byte(walletPass))
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	// wdCoin, err := eew.Withdraw(addr, toSatoshi(1.2435), feeRate)
 	// if err != nil {

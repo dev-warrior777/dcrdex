@@ -192,7 +192,7 @@ func (ew *electrumWallet) connInfo(ctx context.Context, host string) (addr strin
 			}
 		}
 		if wsrv == nil {
-			return "", nil, fmt.Errorf("Electrum wallet server %q not found in getservers result", host)
+			return "", nil, fmt.Errorf("electrum wallet server %q not found in getservers result", host)
 		}
 	}
 	addr, tlsConfig = bestAddr(host, wsrv)
@@ -223,7 +223,7 @@ func (ew *electrumWallet) connect(ctx context.Context, wg *sync.WaitGroup) error
 		return err
 	}
 	if !info.Connected || info.Server == "" {
-		return errors.New("Electrum wallet has no server connections")
+		return errors.New("electrum wallet has no server connections")
 	}
 
 	// Determine if segwit expectation is met. Request and decode an address,

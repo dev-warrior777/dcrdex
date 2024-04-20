@@ -29,7 +29,7 @@ git fetch --depth 1 origin $COMMIT
 git reset --hard FETCH_HEAD
 
 if [ ! -d "${ELECTRUM_DIR}/venv" ]; then
-    python -m venv ${ELECTRUM_DIR}/venv
+    python3 -m venv ${ELECTRUM_DIR}/venv
 fi
 source ${ELECTRUM_DIR}/venv/bin/activate
 python -m ensurepip --upgrade
