@@ -45,6 +45,7 @@ type ListUnspent struct {
 	// "witness_utxo": null
 }
 
+// Spent stores info about a wallet utxo that has been spent.
 type Spent struct {
 	// Spent utxo
 	UtxoOp           *wire.OutPoint

@@ -1,3 +1,6 @@
+// This code is available on the terms of the project LICENSE.md file,
+// also available online at https://blueoakcouncil.org/license/1.0.0.
+
 package goele
 
 import (
@@ -202,7 +205,7 @@ func (wc *WalletClient) ListUnspent(onlySpendable bool) ([]*ListUnspent, error) 
 	}
 	var res = make([]*ListUnspent, 0, 16)
 	for _, utxo := range utxos {
-		// valid stored utxos are never <0
+		// valid stored goele utxos are never have a height <0
 		if utxo.AtHeight < 0 {
 			continue
 		}

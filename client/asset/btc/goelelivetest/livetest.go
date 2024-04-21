@@ -18,9 +18,9 @@ package goelelivetest
 // The goele wallet has coins of whatever size you wish to manually
 // fund it with by sending it coins from alpha.
 // Use goele test app and the goele rpc test client to get an unused
-// funding address `getunusedaddress` and also *make a subscription* to
-// electrumx for that address - using the rpc test client ensures that
-// the subscription is made.
+// funding address `getunusedaddress` which also *makes a subscription*
+// to electrumx for that address - using the rpc test client ensures
+// that the subscription is made.
 
 import (
 	"bytes"
