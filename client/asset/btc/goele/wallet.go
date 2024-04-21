@@ -122,8 +122,6 @@ func makeBasicClient(coin string, net *chaincfg.Params) (client.ElectrumClient, 
 	return nil, errors.New("invalid coin config")
 }
 
-var ErrNotImplemented = errors.New("not impl")
-
 // Start starts goele's electrumx node and sync's client headers chain.
 // This context is the parent of the goele server's context and is shared
 // with goele library functions.
@@ -202,12 +200,18 @@ func (wc *WalletClient) ListUnspent(onlySpendable bool) ([]*ListUnspent, error) 
 	if err != nil {
 		return nil, err
 	}
-	var res = make([]*ListUnspent, 0)
+	var res = make([]*ListUnspent, 0, 16)
 	for _, utxo := range utxos {
-		if onlySpendable && utxo.Frozen {
+		// valid stored utxos are never <0
+		if utxo.AtHeight < 0 {
 			continue
 		}
+		// unconfirmed
 		if onlySpendable && utxo.AtHeight == 0 {
+			continue
+		}
+		// frozen
+		if onlySpendable && utxo.Frozen {
 			continue
 		}
 		amt := btcutil.Amount(utxo.Value)
@@ -262,9 +266,23 @@ func (wc *WalletClient) GetWalletTx(txid string) (int, bool, []byte, error) {
 }
 
 func (wc *WalletClient) GetWalletSpents() ([]*Spent, error) {
-	spents := make([]*Spent, 0)
-
-	return spents, ErrNotImplemented // uses the goele stxo list
+	spents := make([]*Spent, 0, 16)
+	stxos, err := wc.ec.GetWalletSpents()
+	if err != nil {
+		return nil, err
+	}
+	for _, stxo := range stxos {
+		spent := &Spent{
+			UtxoOp:           &stxo.Utxo.Op,
+			UtxoAtHeight:     stxo.Utxo.AtHeight,
+			UtxoValue:        stxo.Utxo.Value,
+			UtxoScriptPubkey: stxo.Utxo.ScriptPubkey,
+			SpendHeight:      stxo.SpendHeight,
+			SpendTxid:        &stxo.SpendTxid,
+		}
+		spents = append(spents, spent)
+	}
+	return spents, nil
 }
 
 func (wc *WalletClient) Broadcast(ctx context.Context, rawTx []byte) (string, error) {
@@ -283,7 +301,8 @@ func (wc *WalletClient) GetTransaction(ctx context.Context, txid string) (*Trans
 	if err != nil {
 		return nil, err
 	}
-	if txid != getTxRes.TxID { // general cheap fast sanity check
+	if txid != getTxRes.TxID {
+		// general cheap fast sanity check
 		return nil, fmt.Errorf("not the requested txid - have %s wanted %s", getTxRes.TxID, txid)
 	}
 	txBytes, err := hex.DecodeString(getTxRes.Hex)

@@ -26,10 +26,6 @@ var (
 		MaxFeeRate:   10,
 		SwapConf:     1,
 	}
-
-	// usr, _        = user.Current()
-	// harnessCtlDir = filepath.Join(usr.HomeDir, "dextest", "btc", "harness-ctl")
-	// tPW           = []byte("abc")
 )
 
 func TestGoeleWallet(t *testing.T) {

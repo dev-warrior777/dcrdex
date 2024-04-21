@@ -161,6 +161,11 @@ func TestGoeleExchangeWalletTestnet(t *testing.T) {
 		tLogger.Infof("%d %s", i, hdr.BlockHash().String())
 	}
 
+	spents, _ := gew.gw.wallet.GetWalletSpents()
+	for _, spent := range spents {
+		tLogger.Infof("%d %s", spent.SpendHeight, spent.SpendTxid.String())
+	}
+
 	// findRedemption
 	swapTxHash, _ := chainhash.NewHashFromStr("1e99930f76638e3eddd79de94bf0ff574c7a400d1e6986cd61b3b5fd8212b1a3")
 	swapVout := uint32(0)

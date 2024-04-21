@@ -3,7 +3,10 @@
 
 package goele
 
-import "github.com/btcsuite/btcd/wire"
+import (
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
+	"github.com/btcsuite/btcd/wire"
+)
 
 // AddressHistory is an element of the array returned by the
 // getaddresshistory RPC.
@@ -43,7 +46,15 @@ type ListUnspent struct {
 }
 
 type Spent struct {
-	//TODO:
+	// Spent utxo
+	UtxoOp           *wire.OutPoint
+	UtxoAtHeight     int64
+	UtxoValue        int64
+	UtxoScriptPubkey []byte
+	// The height at which it was spent
+	SpendHeight int64
+	// The tx that consumed it
+	SpendTxid *chainhash.Hash
 }
 
 // Transaction is the data from a server transaction request.

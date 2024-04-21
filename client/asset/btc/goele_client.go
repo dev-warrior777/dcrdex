@@ -51,7 +51,7 @@ type goeleWalletClient interface {
 	SignTx(txBytes []byte) ([]byte, error)
 	GetPrivKeyForAddress(addr string) (string, error)
 	GetWalletTx(txid string) (int, bool, []byte, error)
-	GetWalletSpents() ([]*goele.Spent, error) // not yet impl.
+	GetWalletSpents() ([]*goele.Spent, error)
 
 	//pass thru
 	GetTransaction(ctx context.Context, txid string) (*goele.Transaction, error)
@@ -149,13 +149,6 @@ func (gw *goeleWallet) sendRawTransaction(tx *wire.MsgTx) (*chainhash.Hash, erro
 	if err != nil {
 		return nil, err
 	}
-	// // Add the transaction to the wallet DB before broadcasting it on the
-	// // network, otherwise it is not immediately recorded. This is expected to
-	// // error on non-wallet transactions such as counterparty transactions.
-	// _, err = gw.wallet.AddLocalTx(b)
-	// if err != nil && !strings.Contains(err.Error(), "unrelated to this wallet") {
-	// 	gw.log.Warnf("Failed to add tx to the wallet DB: %v", err)
-	// }
 	txid, err := gw.wallet.Broadcast(gw.ctx, b)
 	if err != nil {
 		return nil, err
@@ -853,6 +846,5 @@ func (gw *goeleWallet) findOutputSpender(ctx context.Context, txHash *chainhash.
 			}
 		}
 	}
-	fmt.Printf("findOutputSpender %s:%d caller should check msgTx (internal method)\n", txHash.String(), vout)
 	return nil, 0, nil // caller should check msgTx (internal method)
 }
