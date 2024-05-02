@@ -44,7 +44,7 @@ require (
 	github.com/decred/slog v1.2.0
 	github.com/decred/vspd/client/v2 v2.0.0
 	github.com/decred/vspd/types v1.1.0
-	github.com/dev-warrior777/go-electrum-client v0.0.0-20240419163350-f61e65da4cae
+	github.com/dev-warrior777/go-electrum-client v0.0.0-20240421220818-96dff1693e69
 	github.com/dgraph-io/badger v1.6.2
 	github.com/ethereum/go-ethereum v1.11.5
 	github.com/fatih/color v1.11.0

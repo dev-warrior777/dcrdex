@@ -312,8 +312,8 @@ github.com/decred/vspd/types/v2 v2.0.0 h1:FaPA+W4OOMRWK+Vk4fyyYdXoVLRMMRQsxzsnSj
 github.com/decred/vspd/types/v2 v2.0.0/go.mod h1:2xnNqedkt9GuL+pK8uIzDxqYxFlwLRflYFJH64b76n0=
 github.com/denis-tingajkin/go-header v0.4.2/go.mod h1:eLRHAVXzE5atsKAnNRDB90WHCFFnBUn4RN0nRcs1LJA=
 github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f/go.mod h1:xH/i4TFMt8koVQZ6WFms69WAsDWr2XsYL3Hkl7jkoLE=
-github.com/dev-warrior777/go-electrum-client v0.0.0-20240419163350-f61e65da4cae h1:8GLroFdM4pNaQOnT/I0kwtwcwHowDJ7ZWUlEfUa4d50=
-github.com/dev-warrior777/go-electrum-client v0.0.0-20240419163350-f61e65da4cae/go.mod h1:YyQZnZcv19Xnvj5jQ0z4w84yewx+Y2ay47ymaM8XbJ8=
+github.com/dev-warrior777/go-electrum-client v0.0.0-20240421220818-96dff1693e69 h1:M4KStWG+5RyRcE7Ly9dMBQO013+jR80AQDShWHySjlI=
+github.com/dev-warrior777/go-electrum-client v0.0.0-20240421220818-96dff1693e69/go.mod h1:YyQZnZcv19Xnvj5jQ0z4w84yewx+Y2ay47ymaM8XbJ8=
 github.com/dgraph-io/badger v1.6.0/go.mod h1:zwt7syl517jmP8s94KqSxTlM6IMsdhYy6psNgSztDR4=
 github.com/dgraph-io/badger v1.6.2 h1:mNw0qs90GVgGGWylh0umH5iag1j6n/PeJtNvL6KY/x8=
 github.com/dgraph-io/badger v1.6.2/go.mod h1:JW2yswe3V058sS0kZ2h/AXeDSqFjxnZcRrVH//y2UQE=

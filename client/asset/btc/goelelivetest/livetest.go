@@ -25,10 +25,10 @@ package goelelivetest
 import (
 	"bytes"
 	"context"
+	"crypto/rand"
 	"crypto/sha256"
 	"errors"
 	"fmt"
-	"math/rand"
 	"os"
 	"os/exec"
 	"os/user"
@@ -216,6 +216,7 @@ func (rig *testRig) mineAlpha() error {
 func randBytes(l int) []byte {
 	b := make([]byte, l)
 	rand.Read(b)
+	// rand.Read(b)
 	return b
 }
 
